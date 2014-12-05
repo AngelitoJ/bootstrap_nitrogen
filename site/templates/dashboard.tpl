@@ -6,10 +6,10 @@
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta name="viewport" content="width=device-width">
+  <script src="js/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/Chart.min.js"></script>
   <script src="js/templatemo_script.js"></script>
-  <script src="nitrogen/jquery.js"></script>
   <script src='/nitrogen/jquery-ui.min.js' type='text/javascript' charset='utf-8'></script>
   <script src='/nitrogen/livevalidation.min.js' type='text/javascript' charset='utf-8'></script>
   <script src='/nitrogen/nitrogen.min.js' type='text/javascript' charset='utf-8'></script>
@@ -71,5 +71,6 @@
   <script>
   [[[script]]]
   </script>
+  [[[page:load_comet()]]]
 </body>
 </html>
