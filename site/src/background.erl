@@ -19,7 +19,7 @@
         ,bar         = none       :: none | nitrogen_element()
     }).
 
-
+%% Wait for INIT message and setup a proper state, the go idle
 background_update_init(Control, Panel) ->
 %%    io:format("background_update_init: updating element %s in panel %s\n",[Control, Panel]),
     receive 
@@ -27,13 +27,14 @@ background_update_init(Control, Panel) ->
             background_update_idle(#bar_state{ id = Control, panel = Panel, severity = success, count = 0})
     end.
 
+%% Block until desired panel get visible
 background_update_idle(#bar_state{ panel = ThisPanel} = State) -> 
     io:format("background_update: idle\n",[]),
     receive
         {panel, ThisPanel} ->
                         background_update(State)
     end.
-
+%% Loop updating state unless we receive a new panel event, go to idle if apropiate (our panel is no longer visible)
 background_update(#bar_state{ panel = ThisPanel } = State) ->
     receive
         {panel, Panel} when Panel =/= ThisPanel ->
@@ -45,6 +46,7 @@ background_update(#bar_state{ panel = ThisPanel } = State) ->
     end.
 
 
+% state transformation, increment counter and build an apropiate progress bar, send it to browser and return new state
 -spec update_state(bar_state()) -> bar_state().
 update_state(#bar_state{ id = ID, severity = Severity, count = Count } = State) ->
     wf:replace(ID, #bs_progress_bar{ 

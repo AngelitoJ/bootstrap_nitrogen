@@ -6,26 +6,25 @@
 -include("records.hrl").
 
 
+%%% -------------- Main template  functions --------------
+
+
 %% A buch of comet process goes up here, they care for the widgets on some panels
 main() -> 
     #template { file="./site/templates/dashboard.tpl", bindings = [{'Content', main}] }.
 
-
-load_comet() ->
-    %% This comet function updates a counter and display a moving progress bar
-%%    wf:comet(fun() -> background:background_update_init(bar1, main) end, contentPool),    
-    "".
-
-
 title() -> 
             "Bootstrap test on Nitrogen".
 header() -> 
-            #link { text = title(), url = "/"}.
+            "Bootstrap test on Nitrogen".
+%%header() -> #link { text = title(), url = "/"}.
 
 %% Load the sidebar, and notice comet processes main panel is available.
 sidebar() ->
     wf:send(contentPool, {panel, main}),
-    #template{ file="./site/templates/sidebar_panel.tpl"}.
+    #panel{  id   = sidebarPanel
+            ,body = #template{ file="./site/templates/sidebar_panel.tpl"}
+            }.
 
 %% Load templates for the content panel among diferent templates
 content(Panel) ->
@@ -45,6 +44,13 @@ content(Panel) ->
         _      ->
                 content(main)
     end.
+
+load_comet() ->
+    %% This comet function updates a counter and display a moving progress bar
+%%    wf:comet(fun() -> background:background_update_init(bar1, main) end, contentPool),    
+    "".
+
+%%% -------------- Main panel functions --------------
 
 flash() -> #flash{}.
 
@@ -78,34 +84,33 @@ badge(_) ->
     "".
 
 
+%%% -------------- Sidebar panel functions --------------
+
 menubar_block() ->
     lists:map(
                  fun menu_bar_item/1
                 ,[ 
-                     {main,"Home",""}
-                    ,{data,"Data Visualization",9}
-                    ,{maps,"Maps",42}
-                    ,{tables,"Manage Users","ADMIN"}
-                    ,{preferences,"Preferences",""}
+                     {main       , "fa fa-home", "Home", ""}
+                    ,{data       , "fa fa-cubes", "Data Visualization",9}
+                    ,{maps       , "fa fa-map-marker", "Maps",42}
+                    ,{tables     , "fa fa-users" , "Manage Users","ADMIN"}
+                    ,{preferences, "fa fa-cog", "Preferences",""}
                     ]
                 ).
 
-menu_bar_item({Target, Label, Badge}) ->
+menu_bar_item({Target, Class, Label, Badge}) ->
         #listitem {
                     body = #link {                                         
                                     body = [
-                                             #i{ class = "fa fa-map-marker" }
+                                             #i{ class = Class }
                                             ,#bs_badge{ class = "pull-right", text = wf:to_list(Badge) }
                                             ,#literal{ text = Label }
                                                     ]
                                         ,postback = {sidebar, Target}
                                     }
                     }.
-
-
-
-%% Receive sidebar events and change content panel, siganaling comet pool "content" about panel change.
-event({sidebar, Panel}) ->
+%% Receive sidebar events and change content panels, siganaling comet pool "content" about panel change.
+sidebar_event({sidebar, Panel}) ->
     case Panel of
         main    ->
                     wf:send(contentPool, {panel, main}),
@@ -118,8 +123,18 @@ event({sidebar, Panel}) ->
                     wf:replace(contentPanel, content(tables));
         _       ->
                     wf:wire(#alert { text="Function not implemented!"})
-    end;
+    end.
 
+
+%%% -------------- Event functions --------------
+
+
+
+%% reroute sidebar event to dedicated function
+event({sidebar, Msg}) ->
+    sidebar_event({sidebar,Msg});
+
+%% Signal the user for unknown events 
 event(_) ->
             wf:wire(#alert { text="Function not implemented!"}).
 
