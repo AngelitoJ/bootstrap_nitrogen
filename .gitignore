@@ -3,6 +3,5 @@ crash.txt
 
 *.beam
 
-*.log
-
+log/*
 lib/*
