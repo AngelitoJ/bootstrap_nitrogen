@@ -8,10 +8,14 @@
 
 %% A buch of comet process goes up here, they care for the widgets on some panels
 main() -> 
-    %% This comet function updates a counter and display a moving progress bar
-    wf:comet(fun() -> background:background_update_init(bar1, main) end, content),
-    
     #template { file="./site/templates/dashboard.tpl", bindings = [{'Content', main}] }.
+
+
+load_comet() ->
+    %% This comet function updates a counter and display a moving progress bar
+%%    wf:comet(fun() -> background:background_update_init(bar1, main) end, contentPool),    
+    "".
+
 
 title() -> 
             "Bootstrap test on Nitrogen".
@@ -20,7 +24,7 @@ header() ->
 
 %% Load the sidebar, and notice comet processes main panel is available.
 sidebar() ->
-    wf:send(content, {panel, main}),
+    wf:send(contentPool, {panel, main}),
     #template{ file="./site/templates/sidebar_panel.tpl"}.
 
 %% Load templates for the content panel among diferent templates
@@ -104,13 +108,13 @@ menu_bar_item({Target, Label, Badge}) ->
 event({sidebar, Panel}) ->
     case Panel of
         main    ->
-                    wf:send(content, {panel, main}),
+                    wf:send(contentPool, {panel, main}),
                     wf:replace(contentPanel, content(main));
         data    ->
-                    wf:send(content, {panel, data}),
+                    wf:send(contentPool, {panel, data}),
                     wf:replace(contentPanel, content(data));
         tables  ->
-                    wf:send(content, {panel, tables}),
+                    wf:send(contentPool, {panel, tables}),
                     wf:replace(contentPanel, content(tables));
         _       ->
                     wf:wire(#alert { text="Function not implemented!"})

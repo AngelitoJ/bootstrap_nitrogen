@@ -1,4 +1,7 @@
 
+%% Background comet process
+%% (c) 2014 Angel Alvarez
+
 
 -module(background).
 -compile(export_all).
@@ -18,7 +21,7 @@
 
 
 background_update_init(Control, Panel) ->
-    io:format("background_update_init: updating elemnt %s in panel %s\n",[Control, Panel]),
+%%    io:format("background_update_init: updating element %s in panel %s\n",[Control, Panel]),
     receive 
         'INIT' ->
             background_update_idle(#bar_state{ id = Control, panel = Panel, severity = success, count = 0})
@@ -44,7 +47,7 @@ background_update(#bar_state{ panel = ThisPanel } = State) ->
 
 -spec update_state(bar_state()) -> bar_state().
 update_state(#bar_state{ id = ID, severity = Severity, count = Count } = State) ->
-    wf:update(ID, #bs_progress_bar{ 
+    wf:replace(ID, #bs_progress_bar{ 
                                             id         = ID
                                             ,text       = wf:to_list(Count)
                                             ,severity   = Severity
