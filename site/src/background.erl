@@ -1,0 +1,63 @@
+
+
+-module(background).
+-compile(export_all).
+
+-include_lib("nitrogen_core/include/wf.hrl").
+-include("records.hrl").
+
+-type bar_state() :: tuple().
+
+-record(bar_state,{
+         id          = none       :: atom()
+        ,panel       = none       :: atom() 
+        ,severity    = none       :: atom()
+        ,count       = 0          :: integer()
+        ,bar         = none       :: none | nitrogen_element()
+    }).
+
+
+background_update_init(Control, Panel) ->
+    io:format("background_update_init: updating elemnt %s in panel %s\n",[Control, Panel]),
+    receive 
+        'INIT' ->
+            background_update_idle(#bar_state{ id = Control, panel = Panel, severity = success, count = 0})
+    end.
+
+background_update_idle(#bar_state{ panel = ThisPanel} = State) -> 
+    io:format("background_update: idle\n",[]),
+    receive
+        {panel, ThisPanel} ->
+                        background_update(State)
+    end.
+
+background_update(#bar_state{ panel = ThisPanel } = State) ->
+    receive
+        {panel, Panel} when Panel =/= ThisPanel ->
+                background_update_idle(State)
+    after
+        1000 ->
+                NewState = update_state(State),
+                background_update(NewState)
+    end.
+
+
+-spec update_state(bar_state()) -> bar_state().
+update_state(#bar_state{ id = ID, severity = Severity, count = Count } = State) ->
+    wf:update(ID, #bs_progress_bar{ 
+                                            id         = ID
+                                            ,text       = wf:to_list(Count)
+                                            ,severity   = Severity
+                                            ,percentage = Count 
+                                            }),
+    wf:flush(),
+    case Count of
+        33  ->
+                State#bar_state{ severity = warning, count = Count +1 }; 
+        66  ->
+                State#bar_state{ severity = danger, count = Count +1 }; 
+        100 -> 
+                State#bar_state{ severity = success, count = 0 }; 
+        _ ->
+                State#bar_state{ count = Count +1 }
+    end.
