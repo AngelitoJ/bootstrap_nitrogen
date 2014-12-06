@@ -7,7 +7,6 @@
           </ol>
           <h1>Manage Users</h1>
           <p>Here goes tables and users.</p>
-
           <div class="row margin-bottom-30">
             <div class="col-md-12">
               <ul class="nav nav-pills">
@@ -29,143 +28,8 @@
               </div>
               <div class="table-responsive">
                 <h4 class="margin-bottom-15">New Users Table</h4>
-                <table class="table table-striped table-hover table-bordered">
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>First Name</th>
-                      <th>Last Name</th>
-                      <th>Username</th>
-                      <th>Email</th>
-                      <th>Edit</th>
-                      <th>Action</th>
-                      <th>Delete</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>John</td>
-                      <td>Smith</td>
-                      <td>@js</td>
-                      <td>a@company.com</td>
-                      <td><a href="#" class="btn btn-default">Edit</a></td>                    
-                      <td>
-                        <!-- Split button -->
-                        <div class="btn-group">
-                          <button type="button" class="btn btn-info">Action</button>
-                          <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                          </button>
-                          [[[page:dropdown_menu(["Block/Unblock", "Remove", "Activate"])]]]
-                        </div>
-                      </td>
-                      <td><a href="#" class="btn btn-link">Delete</a></td>
-                    </tr>
-                    <tr class="success">
-                      <td>2</td>
-                      <td>Bill</td>
-                      <td>Digital</td>
-                      <td>@bd</td>
-                      <td>bd@company.com</td>
-                      <td><a href="#" class="btn btn-default">Edit</a></td>
-                      <td>
-                        <!-- Split button -->
-                        <div class="btn-group">
-                          <button type="button" class="btn btn-info">Action</button>
-                          <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                          </button>
-                          [[[page:dropdown_menu(["Block/Unblock", "Remove", "Activate"])]]]
-                        </div>
-                      </td>
-                      <td><a href="#" class="btn btn-link">Delete</a></td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>Marry</td>
-                      <td>James</td>
-                      <td>@mj</td>
-                      <td>mj@company.com</td>
-                      <td><a href="#" class="btn btn-default">Edit</a></td>
-                      <td>
-                        <!-- Split button -->
-                        <div class="btn-group">
-                          <button type="button" class="btn btn-info">Action</button>
-                          <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                          </button>
-                          [[[page:dropdown_menu(["Block/Unblock", "Remove", "Activate"])]]]
-                        </div>
-                      </td>
-                      <td><a href="#" class="btn btn-link">Delete</a></td>
-                    </tr>
-                    <tr>
-                      <td>4</td>
-                      <td>Carry</td>
-                      <td>Land</td>
-                      <td>@cl</td>
-                      <td>cl@company.com</td>
-                      <td><a href="#" class="btn btn-default">Edit</a></td>
-                      <td>
-                        <!-- Split button -->
-                        <div class="btn-group">
-                          <button type="button" class="btn btn-info">Action</button>
-                          <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                          </button>
-                          [[[page:dropdown_menu(["Block/Unblock", "Remove", "Activate"])]]]
-                        </div>
-                      </td>
-                      <td><a href="#" class="btn btn-link">Delete</a></td>
-                    </tr>
-                    <tr class="success">
-                      <td>5</td>
-                      <td>New</td>
-                      <td>Caroline</td>
-                      <td>@nc</td>
-                      <td>nc@company.com</td>
-                      <td><a href="#" class="btn btn-default">Edit</a></td>
-                      <td>
-                        <!-- Split button -->
-                        <div class="btn-group">
-                          <button type="button" class="btn btn-info">Action</button>
-                          <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                          </button>
-                          [[[page:dropdown_menu(["Block/Unblock", "Remove", "Activate"])]]]
-                        </div>
-                      </td>
-                      <td><a href="#" class="btn btn-link">Delete</a></td>
-                    </tr>
-                    <tr class="danger">
-                      <td>6</td>
-                      <td>Martin</td>
-                      <td>East</td>
-                      <td>@me</td>
-                      <td>me@company.com</td>
-                      <td><a href="#" class="btn btn-default">Edit</a></td>
-                      <td>
-                        <!-- Split button -->
-                        <div class="btn-group">
-                          <button type="button" class="btn btn-info">Action</button>
-                          <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                          </button>
-                          [[[page:dropdown_menu(["Block/Unblock", "Remove", "Activate"])]]]
-                        </div>
-                      </td>
-                      <td><a href="#" class="btn btn-link">Delete</a></td>
-                    </tr>                    
-                  </tbody>
-                </table>
-              [[[page:pagination_block()]]]
+                [[[page:table_block()]]]
+                [[[page:pagination_block()]]]
               </div>
               <div class="table-responsive">
                 <h4 class="margin-bottom-15">Another Table of Existing Users</h4>
