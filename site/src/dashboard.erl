@@ -86,6 +86,57 @@ badge(_) ->
     "".
 
 %%% -------------- Data panel functions --------------
+
+table_block() ->
+    Table = [
+                 {record, ["1", "John", "Smith", "@js", "js@jar.com"]}
+                ,{record, ["2", "Karl", "Marx", "@km", "km@alist.com"]}
+                ,{record, ["3", "John", "Goodman", "@jg", "jg@addle.com"]}
+                ,{record, ["4", "Chris", "Jensen", "@cj", "cj@computers.com"]}
+                ,{record, ["5", "Mary", "Shelly", "@ms", "ms@books.com"]}
+            ],
+    table(Table).
+
+table(List) ->
+
+    Header =  #tablerow {
+                                    cells = [
+                                                 #tableheader{ text = "#"}
+                                                ,#tableheader{ text = "First Name"}
+                                                ,#tableheader{ text = "Last Name"}
+                                                ,#tableheader{ text = "Username"}
+                                                ,#tableheader{ text = "Email"}
+                                                ,#tableheader{ text = "Edit"}
+                                                ,#tableheader{ text = "Action"}
+                                                ,#tableheader{ text = "Delete"}
+                                            ]
+                                    },
+    Rows = lists:map(fun tablerow/1,List),
+                                    
+    #table {
+             class = "table table-striped table-hover table-bordered"
+            ,rows = [Header|Rows]
+            }.
+
+tablerow({record,List}) ->
+    Cells = lists:map(fun(Data) -> #tablecell{ text = Data} end, List),
+    #tablerow {
+                cells = lists:append(Cells, [
+                                                 #tablecell{ body = #link{ class = "btn btn-default", url = "#", text = "Edit"}}
+                                                ,#tablecell{ body = button_group("Action", ["Block/Unblock", "Remove", "Activate"])}
+                                                ,#tablecell{ body = #link{ class = "btn btn-link", url = "#", text = "Delete"}}
+                                            ])}.
+
+button_group(Label, Options) ->
+    #panel{
+             class = "btn-group"
+            ,body = [
+                       #button{ class = "btn btn-info", text = Label, body = #literal{ text = ""}}
+                      ,#button{ class = "btn btn-info dropdown-togle", body = [ #span{ class = "caret"}, #span{ class = "sr-only", text = "Toggle Dropdown" }]}
+                      ,dropdown_menu(Options)
+                    ]
+            }.
+
 dropdown_menu() ->
     dropdown_menu(["a","b","c"]).
 
