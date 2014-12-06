@@ -25,11 +25,7 @@
                   <span class="caret"></span>
                   <span class="sr-only">Toggle Dropdown</span>
                 </button>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="#">First Name</a></li>
-                  <li><a href="#">Last Name</a></li>
-                  <li><a href="#">Username</a></li>
-                </ul>
+               [[[page:dropdown_menu(["First Name","Last Name","Username"])]]]
               </div>
               <div class="table-responsive">
                 <h4 class="margin-bottom-15">New Users Table</h4>
@@ -62,11 +58,7 @@
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span>
                           </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Bootstrap</a></li>
-                            <li><a href="#">Font Awesome</a></li>
-                            <li><a href="#">jQuery</a></li>
-                          </ul>
+                          [[[page:dropdown_menu(["Block/Unblock", "Remove", "Activate"])]]]
                         </div>
                       </td>
                       <td><a href="#" class="btn btn-link">Delete</a></td>
@@ -86,11 +78,7 @@
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span>
                           </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Bootstrap</a></li>
-                            <li><a href="#">Font Awesome</a></li>
-                            <li><a href="#">jQuery</a></li>
-                          </ul>
+                          [[[page:dropdown_menu(["Block/Unblock", "Remove", "Activate"])]]]
                         </div>
                       </td>
                       <td><a href="#" class="btn btn-link">Delete</a></td>
@@ -110,11 +98,7 @@
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span>
                           </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Bootstrap</a></li>
-                            <li><a href="#">Font Awesome</a></li>
-                            <li><a href="#">jQuery</a></li>
-                          </ul>
+                          [[[page:dropdown_menu(["Block/Unblock", "Remove", "Activate"])]]]
                         </div>
                       </td>
                       <td><a href="#" class="btn btn-link">Delete</a></td>
@@ -134,11 +118,7 @@
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span>
                           </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Bootstrap</a></li>
-                            <li><a href="#">Font Awesome</a></li>
-                            <li><a href="#">jQuery</a></li>
-                          </ul>
+                          [[[page:dropdown_menu(["Block/Unblock", "Remove", "Activate"])]]]
                         </div>
                       </td>
                       <td><a href="#" class="btn btn-link">Delete</a></td>
@@ -158,11 +138,7 @@
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span>
                           </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Bootstrap</a></li>
-                            <li><a href="#">Font Awesome</a></li>
-                            <li><a href="#">jQuery</a></li>
-                          </ul>
+                          [[[page:dropdown_menu(["Block/Unblock", "Remove", "Activate"])]]]
                         </div>
                       </td>
                       <td><a href="#" class="btn btn-link">Delete</a></td>
@@ -182,17 +158,14 @@
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span>
                           </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Bootstrap</a></li>
-                            <li><a href="#">Font Awesome</a></li>
-                            <li><a href="#">jQuery</a></li>
-                          </ul>
+                          [[[page:dropdown_menu(["Block/Unblock", "Remove", "Activate"])]]]
                         </div>
                       </td>
                       <td><a href="#" class="btn btn-link">Delete</a></td>
                     </tr>                    
                   </tbody>
                 </table>
+              [[[page:pagination_block()]]]
               </div>
               <div class="table-responsive">
                 <h4 class="margin-bottom-15">Another Table of Existing Users</h4>
@@ -225,11 +198,7 @@
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span>
                           </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Bootstrap</a></li>
-                            <li><a href="#">Font Awesome</a></li>
-                            <li><a href="#">jQuery</a></li>
-                          </ul>
+                          [[[page:dropdown_menu(["Block/Unblock", "Remove", "Activate"])]]]
                         </div>
                       </td>
                       <td><a href="#" class="btn btn-link">Delete</a></td>
@@ -248,11 +217,7 @@
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span>
                           </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Bootstrap</a></li>
-                            <li><a href="#">Font Awesome</a></li>
-                            <li><a href="#">jQuery</a></li>
-                          </ul>
+                          [[[page:dropdown_menu(["Block/Unblock", "Remove", "Activate"])]]]
                         </div>
                       </td>
                       <td><a href="#" class="btn btn-link">Delete</a></td>
@@ -272,11 +237,7 @@
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span>
                           </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Bootstrap</a></li>
-                            <li><a href="#">Font Awesome</a></li>
-                            <li><a href="#">jQuery</a></li>
-                          </ul>
+                          [[[page:dropdown_menu(["Block/Unblock", "Remove", "Activate"])]]]
                         </div>
                       </td>
                       <td><a href="#" class="btn btn-link">Delete</a></td>
@@ -296,11 +257,7 @@
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span>
                           </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Bootstrap</a></li>
-                            <li><a href="#">Font Awesome</a></li>
-                            <li><a href="#">jQuery</a></li>
-                          </ul>
+                          [[[page:dropdown_menu(["Block/Unblock", "Remove", "Activate"])]]]
                         </div>
                       </td>
                       <td><a href="#" class="btn btn-link">Delete</a></td>
@@ -320,11 +277,7 @@
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span>
                           </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Bootstrap</a></li>
-                            <li><a href="#">Font Awesome</a></li>
-                            <li><a href="#">jQuery</a></li>
-                          </ul>
+                          [[[page:dropdown_menu(["Block/Unblock", "Remove", "Activate"])]]]
                         </div>
                       </td>
                       <td><a href="#" class="btn btn-link">Delete</a></td>
@@ -344,11 +297,7 @@
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span>
                           </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Bootstrap</a></li>
-                            <li><a href="#">Font Awesome</a></li>
-                            <li><a href="#">jQuery</a></li>
-                          </ul>
+                          [[[page:dropdown_menu(["Block/Unblock", "Remove", "Activate"])]]]
                         </div>
                       </td>
                       <td><a href="#" class="btn btn-link">Delete</a></td>
@@ -356,14 +305,7 @@
                   </tbody>
                 </table>
               </div>
-              <ul class="pagination pull-right">
-                <li class="disabled"><a href="#">&laquo;</a></li>
-                <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">2 <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">3 <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">4 <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">5 <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">&raquo;</a></li>
+              [[[page:pagination_block()]]]
               </ul>  
             </div>
           </div>
