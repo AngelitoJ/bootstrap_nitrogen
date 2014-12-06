@@ -1,11 +1,7 @@
       <script src="js/Chart.min.js"></script>
       <div class="templatemo-content-wrapper">
         <div class="templatemo-content">
-          <ol class="breadcrumb">
-            <li><a href="dashboard">Admin Panel</a></li>
-            <li><a href="#">Data Visualization</a></li>
-            <li class="active">Charts</li>
-          </ol>
+          [[[page:breadcrumb(["Admin Panel", "Data Visualization", {active, "Charts"}])]]]
           <h1>Data Visualization</h1>
           <p>Credit goes to <a href="http://www.chartjs.org">chartjs.org</a></p>         
           <div class="templatemo-charts">

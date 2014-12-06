@@ -19,6 +19,19 @@ header() ->
             "Bootstrap test on Nitrogen".
 %%header() -> #link { text = title(), url = "/"}.
 
+breadcrumb(Items) ->
+    Body = lists:map(
+                        fun({active, Element}) -> #listitem{ class = "active", text = Element };
+                           (Other)             -> #listitem{ text = Other} 
+                        end
+                        ,Items),
+    #list{ 
+             class = "breadcrumb"
+            ,numbered = true
+            ,body = Body
+        }.
+
+
 %% Load the sidebar, and notice comet processes main panel is available.
 sidebar() ->
     wf:send(contentPool, {panel, main}),

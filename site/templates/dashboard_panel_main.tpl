@@ -1,11 +1,6 @@
       <div class="templatemo-content-wrapper">
         <div class="templatemo-content">
-          <ol class="breadcrumb">
-            <li><a href="index">Admin Panel</a></li>
-            <li><a href="#">Dashboard</a></li>
-            <li class="active">Overview</li>
-            <li><a href="sign-in">Sign In Form</a></li>
-          </ol>
+        [[[page:breadcrumb(["Admin Panel", "Dashboard", {active, "Overview"}])]]]
           <h1>Dashboard</h1>
           <p>Dashboard is <a rel="nofollow" href="http://www.templatemo.com/preview/templatemo_415_dashboard">free admin template</a> for everyone. Credits go to <a href="http://chartjs.org">Chart JS</a>, <a href="http://getbootstrap.com">Bootstrap</a>, and <a href="http://jqvmap.com">JQVMap</a>. templatemo provides <a href="#">free website templates</a> that can be used for any purpose. Morbi id nisi enim. Ut congue interdum pharetra facilisi. Aenean consectetur pellentesque mauris nec ornare. Nam tortor just, condimentum.</p>
           <div class="margin-bottom-30">
