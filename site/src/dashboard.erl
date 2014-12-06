@@ -26,6 +26,8 @@ sidebar() ->
             ,body = #template{ file="./site/templates/sidebar_panel.tpl"}
             }.
 
+
+
 %% Load templates for the content panel among diferent templates
 content(Panel) ->
     case Panel of
@@ -83,6 +85,33 @@ badge(N) when is_integer(N) ->
 badge(_) ->
     "".
 
+%%% -------------- Data panel functions --------------
+dropdown_menu() ->
+    dropdown_menu(["a","b","c"]).
+
+dropdown_menu(List) when is_list(List) ->
+    Body = lists:map(fun(Item) -> #listitem{ body = #link{ text = Item, url="#" }} end, List),
+    #list{
+             class = "dropdown-menu" 
+            ,body = Body 
+    }.
+
+pagination_block() ->
+    #list{  
+             class = "pagination pull-right"
+            ,body = [
+                     #listitem{ class = "disabled "
+                                ,body = #link { text = "&laquo;", html_encode = false, url = "#"}}
+                    ,#listitem{ class = "active"
+                                ,body = #link { url="#", body = [ #literal{ text="1"}, #span{ class = "sr-only", text ="(current)"}]}}
+                    ,#listitem{ body = #link { url ="#", body = [ #literal{ text ="2" }, #span{ class = "sr-only", text ="(current)"}]}}
+                    ,#listitem{ body = #link { url ="#", body = [ #literal{ text ="3" }, #span{ class = "sr-only", text ="(current)"}]}}
+                    ,#listitem{ body = #link { url ="#", body = [ #literal{ text ="4" }, #span{ class = "sr-only", text ="(current)"}]}}
+                    ,#listitem{ body = #link { url ="#", body = [ #literal{ text ="5" }, #span{ class = "sr-only", text ="(current)"}]}}
+                    ,#listitem{ body = #link { url="#", text = "&raquo;", html_encode =false }}
+                    ]
+    }.
+
 
 %%% -------------- Sidebar panel functions --------------
 
@@ -109,15 +138,15 @@ menu_bar_item({Target, Class, Label, Badge}) ->
                                         ,postback = {sidebar, Target}
                                     }
                     }.
-%% Receive sidebar events and change content panels, siganaling comet pool "content" about panel change.
+%% Receive sidebar events and change content panels, signaling comet pool "content" about panel change.
 sidebar_event({sidebar, Panel}) ->
     case Panel of
         main    ->
                     wf:send(contentPool, {panel, main}),
                     wf:replace(contentPanel, content(main));
         data    ->
-                    wf:send(contentPool, {panel, data}),
-                    wf:replace(contentPanel, content(data));
+                    wf:replace(contentPanel, content(data)),
+                    wf:send(contentPool, {panel, data});
         tables  ->
                     wf:send(contentPool, {panel, tables}),
                     wf:replace(contentPanel, content(tables));
