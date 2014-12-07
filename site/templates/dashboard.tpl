@@ -8,7 +8,6 @@
   <meta name="viewport" content="width=device-width">
   <script src="js/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
-  <script src="js/Chart.min.js"></script>
   <script src="js/templatemo_script.js"></script>
   <script src='/nitrogen/jquery-ui.min.js' type='text/javascript' charset='utf-8'></script>
   <script src='/nitrogen/livevalidation.min.js' type='text/javascript' charset='utf-8'></script>
@@ -42,7 +41,7 @@
               <h4 class="modal-title" id="myModalLabel">Are you sure you want to sign out?</h4>
             </div>
             <div class="modal-footer">
-              <a href="index" class="btn btn-primary">Yes</a>
+              <a href="login" class="btn btn-primary">Yes</a>
               <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
             </div>
           </div>
@@ -71,6 +70,5 @@
   <script>
   [[[script]]]
   </script>
-  [[[page:load_comet()]]]
 </body>
 </html>

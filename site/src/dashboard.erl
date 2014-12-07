@@ -203,13 +203,13 @@ menu_bar_item({Target, Class, Label, Badge}) ->
 sidebar_event({sidebar, Panel}) ->
     case Panel of
         main    ->
-                    wf:send(contentPool, {panel, main}),
+                    %wf:send(contentPool, {panel, main}),
                     wf:replace(contentPanel, content(main));
         data    ->
-                    wf:replace(contentPanel, content(data)),
+                    %wf:replace(contentPanel, content(data)),
                     wf:send(contentPool, {panel, data});
         tables  ->
-                    wf:send(contentPool, {panel, tables}),
+                    %wf:send(contentPool, {panel, tables}),
                     wf:replace(contentPanel, content(tables));
         _       ->
                     wf:wire(#alert { text="Function not implemented!"})
