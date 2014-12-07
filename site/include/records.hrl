@@ -39,3 +39,11 @@
                         ,dimissible  = true   :: boolean()
                         ,severity    = info   :: info | success | warning | danger 
                     }).
+
+-type pag_item()  :: minimum | less | string() | {active, string()} | more | maximum.
+
+%% Bootstrap pagination element
+-record(bs_pagination, {
+                             ?ELEMENT_BASE(element_bs_pagination)
+                            ,items :: [ pag_item() ]
+                        }).
