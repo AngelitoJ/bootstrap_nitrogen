@@ -11,64 +11,44 @@
 
 -type bar_state() :: tuple().
 
--record(bar_state,{
-         id          = none       :: atom()
-        ,panel       = none       :: atom() 
-        ,severity    = none       :: atom()
-        ,count       = 0          :: integer()
-        ,bar         = none       :: none | nitrogen_element()
-    }).
+-record(state,{
+                 count       = 0    :: integer()
+                ,element            :: nitrogen_element()
+                }).
 
-%% Wait for INIT message and setup a proper state, the go idle
-background_update_init(Control, Panel, Count) ->
-    io:format("Hey! I'm a comet process updating ~p in panel ~p \n",[Control, Panel]),
-    background_update_idle(#bar_state{ id = Control, panel = Panel, severity = success, count = Count}).
 
-%% Block until desired panel get visible
-background_update_idle(#bar_state{ id = Control, panel = ThisPanel} = State) -> 
+bar_update(Control, Count) ->
+    Element = #bs_progress_bar{ 
+                                 id         = Control
+                                ,text       = wf:to_list(Count)
+                                ,percentage = Count 
+                                },
+    bar_update_loop(#state{ count = Count, element = Element }).
+
+%% Loop updating the state and wiring the results
+bar_update_loop(State) ->
     receive
-        'INIT' ->
-                        io:format("background_update_idle: I'm process for ~p and I am the first in the pool..\n",[Control]),
-                        background_update_idle(State);        
-        {panel, ThisPanel} ->
-                        io:format("background_update_idle: got a {~p, ~p} msg, going to ACTIVE..\n",[panel,ThisPanel]),
-                        background_update(State);
-        Other ->
-                        io:format("background_update_idle: got a ~p msg, going to IDLE..\n",[Other]),
-                        background_update_idle(State)        
-    end.
-%% Loop updating state unless we receive a new panel event, go to idle if apropiate (our panel is no longer visible)
-background_update(#bar_state{ panel = ThisPanel } = State) ->
-    io:format("background_update_idle: ACTIVE for panel ~p..\n",[ThisPanel]),
-    receive
-        {panel, Panel} when Panel =/= ThisPanel ->
-                io:format("background_update: got a {~p, ~p} msg, going to idle..\n",[panel,Panel]),
-                background_update_idle(State)
     after
         1000 ->
-                io:format("background_update: looping\n",[]),
                 NewState = update_state(State),
-                background_update(NewState)
+                Element  = NewState#state.element,
+                wf:replace(Element#bs_progress_bar.id, Element),
+                bar_update_loop(NewState)
     end.
 
 
 % state transformation, increment counter and build an apropiate progress bar, send it to browser and return new state
 -spec update_state(bar_state()) -> bar_state().
-update_state(#bar_state{ id = ID, severity = Severity, count = Count } = State) ->
-    wf:replace(ID, #bs_progress_bar{ 
-                                            id         = ID
-                                            ,text       = wf:to_list(Count)
-                                            ,severity   = Severity
-                                            ,percentage = Count 
-                                            }),
-    wf:flush(),
+update_state(#state{ count = Count, element = Element } = State) ->
+%%    wf:replace(Element#bs_progress_bar.id, Element), 
+%%    wf:flush(),
     case Count of
         33  ->
-                State#bar_state{ severity = warning, count = Count +1 }; 
+                State#state{ count = Count+1, element = Element#bs_progress_bar{ severity = warning, text = wf:to_list(Count), percentage = Count }}; 
         66  ->
-                State#bar_state{ severity = danger, count = Count +1 }; 
+                State#state{ count = Count+1, element = Element#bs_progress_bar{ severity = danger, text = wf:to_list(Count), percentage = Count }}; 
         100 -> 
-                State#bar_state{ severity = success, count = 0 }; 
+                State#state{ count = 0, element = Element#bs_progress_bar{ severity = success, text = wf:to_list(Count), percentage = Count }}; 
         _ ->
-                State#bar_state{ count = Count +1 }
+                State#state{ count = Count+1, element = Element#bs_progress_bar{ text = wf:to_list(Count), percentage = Count }}
     end.
