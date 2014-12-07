@@ -1,4 +1,6 @@
 %% -*- mode: nitrogen -*-
+%% Copyright (c) 2014 Angel Alvarez
+
 -module(dashboard).
 -compile(export_all).
 
@@ -161,19 +163,10 @@ dropdown_menu(List) when is_list(List) ->
     }.
 
 pagination_block() ->
-    #list{  
-             class = "pagination pull-right"
-            ,body = [
-                     #listitem{ class = "disabled "
-                                ,body = #link { text = "&laquo;", html_encode = false, url = "#"}}
-                    ,#listitem{ class = "active"
-                                ,body = #link { url="#", body = [ #literal{ text="1"}, #span{ class = "sr-only", text ="(current)"}]}}
-                    ,#listitem{ body = #link { url ="#", body = [ #literal{ text ="2" }, #span{ class = "sr-only", text ="(current)"}]}}
-                    ,#listitem{ body = #link { url ="#", body = [ #literal{ text ="3" }, #span{ class = "sr-only", text ="(current)"}]}}
-                    ,#listitem{ body = #link { url ="#", body = [ #literal{ text ="4" }, #span{ class = "sr-only", text ="(current)"}]}}
-                    ,#listitem{ body = #link { url ="#", body = [ #literal{ text ="5" }, #span{ class = "sr-only", text ="(current)"}]}}
-                    ,#listitem{ body = #link { url="#", text = "&raquo;", html_encode =false }}
-                    ]
+    #bs_pagination{
+                     id = table1
+                    ,class = "pull-right"
+                    ,items = [minimum, "1", {current, "2"}, "3", "4", "5", more]
     }.
 
 
