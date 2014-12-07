@@ -6,19 +6,8 @@
               <span class="btn btn-default">Go</span>
             </form>
           </li>
-          <li class="sub">
-            <a href="javascript:;">
-              <i class="fa fa-database"></i> Nested Menu <div class="pull-right"><span class="caret"></span></div>
-            </a>
-            <ul class="templatemo-submenu">
-              <li><a href="#">Aenean</a></li>
-              <li><a href="#">Pellentesque</a></li>
-              <li><a href="#">Congue</a></li>             
-              <li><a href="#">Interdum</a></li>
-              <li><a href="#">Facilisi</a></li>
-            </ul>
-          </li>
-          [[[page:menubar_block]]]          
+          [[[page:sidebar_comet_block()]]]
+          [[[page:sidebar_menu_block]]]          
           <li><a href="javascript:;" data-toggle="modal" data-target="#confirmModal"><i class="fa fa-sign-out"></i>Sign Out</a></li>
         </ul>
       </div>
