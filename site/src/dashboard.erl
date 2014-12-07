@@ -13,8 +13,6 @@
 
 %% A buch of comet process goes up here, they care for the widgets on some panels
 main() ->
-    wf:comet(fun() -> background:background_update_init(bar1, main, 50 ) end),    
-    wf:comet(fun() -> background:background_update_init(bar2, main, 45 ) end),    
      #template { file="./site/templates/dashboard.tpl", bindings = [{'Content', main}] }.
 
 title() -> 
@@ -75,7 +73,31 @@ load_comet() ->
 
 %%% -------------- Sidebar panel functions --------------
 
-menubar_block() ->
+sidebar_comet_block() ->
+    #listitem{
+                class = "sub"
+                ,body = [
+                             #link{  url = "javascript:;"
+                                    ,body = [
+                                                 #i{ class = "fa fa-database"}
+                                                ,#literal{ text = "Comet Options"}
+                                                ,#panel{  class = "pull-right", body = #span{ class = "caret"}}   
+                                            ]
+                                    }
+                            ,#list{
+                                     class = "templatemo-submenu"
+                                    ,numbered = false 
+                                    ,body = [
+                                                 #listitem{ body = #link{ text = "Spawn Comet on Bar1", postback = {sidebar, bar1_comet}}}
+                                                ,#listitem{ body = #link{ text = "Spawn Comet on Bar2", postback = {sidebar, bar2_comet}}}
+                                                ,#listitem{ body = #link{ text = "Any1 Comet", postback = {sidebar, none}}}
+                                                ,#listitem{ body = #link{ text = "Any2 Comet", postback = {sidebar, none}}}
+                                            ]
+                                    }
+                        ]
+            }.
+
+sidebar_menu_block() ->
     lists:map(
                  fun menu_bar_item/1
                 ,[ 
@@ -99,17 +121,18 @@ menu_bar_item({Target, Class, Label, Badge}) ->
                                     }
                     }.
 %% Receive sidebar events and change content panels, signaling comet pool "content" about panel change.
-sidebar_event({sidebar, Panel}) ->
-    case Panel of
-        main    ->
-                    wf:replace(contentPanel, content(main)),
-                    wf:send(contentPool, {panel, main});
-        data    ->
-                    wf:replace(contentPanel, content(data)),
-                    wf:send(contentPool, {panel, data});
-        tables  ->
-                    wf:replace(contentPanel, content(tables)),
-                    wf:send(contentPool, {panel, tables});
+sidebar_event({sidebar, Option}) ->
+    case Option of
+        main        ->
+                        wf:replace(contentPanel, content(main));
+        data        ->
+                        wf:replace(contentPanel, content(data));
+        tables      ->
+                        wf:replace(contentPanel, content(tables));
+        bar1_comet  ->
+                        wf:comet(fun() -> background:bar_update(bar1, 50) end);
+        bar2_comet  ->
+                        wf:comet(fun() -> background:bar_update(bar2, 45) end);
         _       ->
                     wf:wire(#alert { text="Function not implemented!"})
     end.
@@ -159,7 +182,7 @@ table_block() ->
                 ,{record, ["5", "Mary", "Shelly", "@ms", "ms@books.com"]}
             ],
     L  = length(Data),       
-    R0 = lists:map(fun(Item) -> {random:uniform(5), Item} end, Data),
+    R0 = lists:map(fun(Item) -> {random:uniform(L), Item} end, Data),
     R1 = lists:sort(R0),
     R2 = lists:map(fun({_,I}) -> I end, R1),
     table(R2).
