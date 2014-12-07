@@ -21,7 +21,7 @@ title() ->
             "Bootstrap test on Nitrogen".
 header() -> 
             "Bootstrap test on Nitrogen".
-%%header() -> #link { text = title(), url = "/"}.
+
 
 breadcrumb(Items) ->
     Body = lists:map(
