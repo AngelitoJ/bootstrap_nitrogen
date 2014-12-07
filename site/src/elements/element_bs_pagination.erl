@@ -81,7 +81,7 @@ transform_element(#bs_pagination{ id = Id, size = Size, class = CustomClass, ite
 %% Create an element for every page marker needed in the Bootstrap navigation control
 bs_pagination_item(Item) ->
     case Item of
-        {Id, minimum}           -> %% Absolute lower bound of posible markers, generate a disabled control.
+        {_Id, minimum}           -> %% Absolute lower bound of posible markers, generate a disabled control.
                         #listitem{ class = "disabled ",body = #link { text = "&laquo;", html_encode = false }};
 
         {Id, less}              -> %% Relative lower bound, it can be posible to request lower makers with a suitable postback event
@@ -90,8 +90,8 @@ bs_pagination_item(Item) ->
         {Id, more}              -> %% Relative upper bound, it can be posible to request upper makers with a suitable postback event
                         #listitem{ body = #link { text = "&raquo;", html_encode = false, postback = {pagination, Id, more}}};
 
-        {Id, maximum}          -> %% Absolute upper bound of posible markers, generate a disabled control.
-                        #listitem{ class = "disabled ",body = #link { text = "&laquo;", html_encode = false }};
+        {_Id, maximum}          -> %% Absolute upper bound of posible markers, generate a disabled control.
+                        #listitem{ class = "disabled ",body = #link { text = "&raquo;", html_encode = false }};
 
         {Id, {current, Label}} -> %% Current page marker, style as active and disable postback
                         #listitem{ class = "active", body = #link { body = [ #literal{ text = Label }, #span{ class = "sr-only", text ="(current)"}]}};
