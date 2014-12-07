@@ -36,7 +36,7 @@ breadcrumb(Items) ->
 
 %% Load the sidebar, and notice comet processes main panel is available.
 sidebar() ->
-    wf:send(contentPool, {panel, main}),
+    %%wf:send(contentPool, {panel, main}),
     #panel{  id   = sidebarPanel
             ,body = #template{ file="./site/templates/sidebar_panel.tpl"}
             }.
@@ -223,18 +223,23 @@ sidebar_event({sidebar, Panel}) ->
 event({sidebar, Msg}) ->
     sidebar_event({sidebar,Msg});
 
+%% Handle pagination events for the user table pagnination control
 event({pagination, pg_usertable, Item}) ->
+    %% make a new control reflecting new current page
     NewPagination = #bs_pagination{
-                                     id    = pg_usertable
+                                     id    = pg_usertable   %% Don't forget to set the same ID
                                     ,class = "pull-right"
                                     ,items = lists:map(
                                                         fun(I) when I == Item -> {current, I};
                                                            (I) -> I end
                                                         ,[minimum, "1", "2", "3", "4", "5", maximum])
                                     },
+    %% place the updated table (current setup is just random)                                
     wf:replace(usertable, table_block()),
+    %% page the new pagination control
     wf:replace(pg_usertable, NewPagination);
 
+%% Handle pagination event for any pagination control
 event({pagination, Id, Item}) ->
     Msg = io_lib:format("User click ~p on pagination element: ~p",[Item, Id]),
     wf:wire(#alert{ text = Msg});
@@ -246,27 +251,6 @@ event(Other) ->
 
 
 
-
-
-%sidebarlink(maps) ->
-%    wf:wire(maps_menu, #event { type=click, postback={content,dashboard} } ).
-
-
-% event(click) ->
-%     wf:replace(button, #panel { 
-%         body="You clicked the button!", 
-%         actions=#effect { effect=highlight }
-%     });
-
-
-% event(bar_click) ->
-%     wf:replace(bar1, #bs_progress_bar{ id = bar2, severity = danger, text = "99", percentage = 99 }),
-%     FlashID = wf:temp_id(),
-%     wf:flash(FlashID, #panel { 
-%                                  class = "alert alert-success alert-dismissible"
-%                                 ,text = "You clicked the button." 
-%                                 }),
-%     wf:wire(FlashID, #hide { effect=blind, speed=100 });
 
 
 
