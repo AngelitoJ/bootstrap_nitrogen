@@ -103,14 +103,17 @@ badge(_) ->
 %%% -------------- Data panel functions --------------
 
 table_block() ->
-    Table = [
+    Data = [
                  {record, ["1", "John", "Smith", "@js", "js@jar.com"]}
                 ,{record, ["2", "Karl", "Marx", "@km", "km@alist.com"]}
                 ,{record, ["3", "John", "Goodman", "@jg", "jg@addle.com"]}
                 ,{record, ["4", "Chris", "Jensen", "@cj", "cj@computers.com"]}
                 ,{record, ["5", "Mary", "Shelly", "@ms", "ms@books.com"]}
             ],
-    table(Table).
+    R0 = lists:map(fun(Item) -> {random:uniform(5), Item} end, Data),
+    R1 = lists:sort(R0),
+    R2 = lists:map(fun({_,I}) -> I end, R1),
+    table(R2).
 
 table(List) ->
 
@@ -129,7 +132,8 @@ table(List) ->
     Rows = lists:map(fun tablerow/1,List),
                                     
     #table {
-             class = "table table-striped table-hover table-bordered"
+             id = usertable
+            ,class = "table table-striped table-hover table-bordered"
             ,rows = [Header|Rows]
             }.
 
@@ -164,9 +168,9 @@ dropdown_menu(List) when is_list(List) ->
 
 pagination_block() ->
     #bs_pagination{
-                     id = table1
+                     id = pg_usertable
                     ,class = "pull-right"
-                    ,items = [minimum, "1", {current, "2"}, "3", "4", "5", more]
+                    ,items = [minimum, "1", {current, "2"}, "3", "4", "5", maximum]
     }.
 
 
@@ -218,6 +222,18 @@ sidebar_event({sidebar, Panel}) ->
 %% reroute sidebar event to dedicated function
 event({sidebar, Msg}) ->
     sidebar_event({sidebar,Msg});
+
+event({pagination, pg_usertable, Item}) ->
+    NewPagination = #bs_pagination{
+                                     id    = pg_usertable
+                                    ,class = "pull-right"
+                                    ,items = lists:map(
+                                                        fun(I) when I == Item -> {current, I};
+                                                           (I) -> I end
+                                                        ,[minimum, "1", "2", "3", "4", "5", maximum])
+                                    },
+    wf:replace(usertable, table_block()),
+    wf:replace(pg_usertable, NewPagination);
 
 event({pagination, Id, Item}) ->
     Msg = io_lib:format("User click ~p on pagination element: ~p",[Item, Id]),
