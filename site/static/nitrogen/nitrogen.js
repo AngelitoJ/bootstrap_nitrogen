@@ -1270,6 +1270,8 @@ NitrogenClass.prototype.$ws_open = function() {
 NitrogenClass.prototype.$send_pagecontext = function() {
     var pageContext = this.$params["pageContext"];
     var bertified = Bert.encode_to_bytearray(Bert.tuple(Bert.atom("page_context"), Bert.binary(pageContext)));
+    this.$console_log(pageContext);
+    this.$console_log(bertified);
     this.$websocket.send(bertified);
 };
 
