@@ -6,10 +6,10 @@
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta name="viewport" content="width=device-width">
-  <script src="js/jquery.min.js"></script>
+  <script src="/nitrogen/jquery.js"></script>
   <script src='/nitrogen/jquery-ui.min.js' type='text/javascript' charset='utf-8'></script>
   <script src='/nitrogen/livevalidation.min.js' type='text/javascript' charset='utf-8'></script>
-  <script src='/nitrogen/nitrogen.min.js' type='text/javascript' charset='utf-8'></script>
+  <script src='/nitrogen/nitrogen.js' type='text/javascript' charset='utf-8'></script>
   <script src='/nitrogen/bert.min.js' type='text/javascript' charset='utf-8'></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/templatemo_script.js"></script>
@@ -31,7 +31,7 @@
     </div>
     <div class="template-page-wrapper">
       <!--/.navbar-collapse -->
-      [[[page:sidebar()]]]
+      [[[page:sidebar_block()]]]
       [[[page:content(Content)]]]
       <!-- Modal -->
       <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
