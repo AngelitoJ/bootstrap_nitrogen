@@ -9,13 +9,7 @@
 ]).
 
 
--type pag_item()  :: minimum | less | string() | {active, string()} | more | maximum.
 
-%% Move the following record definition to records.hrl:
--record(bs_pagination, {
-							 ?ELEMENT_BASE(element_bs_pagination)
-							,items :: [ pag_item() ]
-    					}).
 
 -spec reflect() -> [atom()].
 reflect() -> record_info(fields, bs_pagination).
@@ -26,7 +20,8 @@ transform_element(#bs_pagination{ id = Id, class = Class, items = Items}) ->
     Body     = lists:map(fun bs_pagination_item/1, PagItems),
 
     #list{  
-             class = "pagination " ++ Class
+             id = Id
+            ,class = "pagination " ++ Class
             ,body  = Body
     	}.
 
