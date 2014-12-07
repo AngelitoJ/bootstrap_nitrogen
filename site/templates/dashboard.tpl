@@ -7,12 +7,13 @@
   <meta name="description" content="" />
   <meta name="viewport" content="width=device-width">
   <script src="js/jquery.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/templatemo_script.js"></script>
   <script src='/nitrogen/jquery-ui.min.js' type='text/javascript' charset='utf-8'></script>
   <script src='/nitrogen/livevalidation.min.js' type='text/javascript' charset='utf-8'></script>
   <script src='/nitrogen/nitrogen.min.js' type='text/javascript' charset='utf-8'></script>
   <script src='/nitrogen/bert.min.js' type='text/javascript' charset='utf-8'></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/templatemo_script.js"></script>
+  <script src="js/Chart.min.js"></script>
   <link rel="stylesheet" href="/nitrogen/jquery-ui/jquery.ui.all.css" type="text/css" media="screen" charset="utf-8" />
   <link rel="stylesheet" href="css/templatemo_main.css">
 </head>
@@ -53,20 +54,6 @@
         </div>
       </footer>
     </div>
-  <script type="text/javascript">
-    $('#myTab a').click(function (e) {
-      e.preventDefault();
-      $(this).tab('show');
-    });
-
-    $('#loading-example-btn').click(function () {
-      var btn = $(this);
-      btn.button('loading');
-      // $.ajax(...).always(function () {
-      //   btn.button('reset');
-      // });
-  });
-  </script>
   <script>
   [[[script]]]
   </script>

@@ -1,10 +1,6 @@
       <div class="templatemo-content-wrapper">
         <div class="templatemo-content">
         [[[page:breadcrumb(["Admin Panel", "Dashboard", {active, "Overview"}])]]]
-          <h1>Nitrogen Bootstrap playground</h1>
-          <p>Playground is a toy project to feature current Nitrogen capabilities and provide a test bed to develop Bootstrap components upon nitrogen DSL.</p>
-          <p><a href="nitrogenproject.com">Nitrogen Project</a> is a erlang web framework geared toward higly dynamic sites.</p>
-          <p>Dashboard is <a rel="nofollow" href="http://www.templatemo.com/preview/templatemo_415_dashboard">free admin template</a> for everyone. Credits go to <a href="http://chartjs.org">Chart JS</a>, <a href="http://getbootstrap.com">Bootstrap</a>, and <a href="http://jqvmap.com">JQVMap</a>. templatemo provides <a href="#">free website templates</a> that can be used for any purpose.</p>
           <div class="margin-bottom-30">
             <div class="row">
               <div class="col-md-12">
@@ -236,6 +232,19 @@
         </div>
       </div>
       <script>
+    $('#myTab a').click(function (e) {
+      e.preventDefault();
+      $(this).tab('show');
+    });
+
+    $('#loading-example-btn').click(function () {
+      var btn = $(this);
+      btn.button('loading');
+      // $.ajax(...).always(function () {
+      //   btn.button('reset');
+      // });
+  });
+
           // Line chart
     var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
     var lineChartData = {
