@@ -45,5 +45,6 @@
 %% Bootstrap pagination element
 -record(bs_pagination, {
                              ?ELEMENT_BASE(element_bs_pagination)
-                            ,items :: [ pag_item() ]
+                            ,size  = normal :: small | normal | large
+                            ,items = []     :: [ pag_item() ]
                         }).
