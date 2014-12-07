@@ -215,14 +215,18 @@ sidebar_event({sidebar, Panel}) ->
 %%% -------------- Event functions --------------
 
 
-
 %% reroute sidebar event to dedicated function
 event({sidebar, Msg}) ->
     sidebar_event({sidebar,Msg});
 
+event({pagination, Id, Item}) ->
+    Msg = io_lib:format("User click ~p on pagination element: ~p",[Item, Id]),
+    wf:wire(#alert{ text = Msg});
+
 %% Signal the user for unknown events 
-event(_) ->
-            wf:wire(#alert { text="Function not implemented!"}).
+event(Other) ->
+    Msg = io_lib:format("Received ~p event",[Other]),
+    wf:wire(#alert{ text = Msg}).
 
 
 
