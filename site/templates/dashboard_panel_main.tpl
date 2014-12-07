@@ -262,11 +262,9 @@
       ]
 
     }
-
-    window.onload = function(){
+    $(document).ready( function() {
       var ctx_line = document.getElementById("templatemo-line-chart").getContext("2d");
-      window.myLine = new Chart(ctx_line).Line(lineChartData, {
-        responsive: true
-      });
-    };
+      window.myLine = new Chart(ctx_line).Line(lineChartData, { responsive: true });
+    });
+
       </script>

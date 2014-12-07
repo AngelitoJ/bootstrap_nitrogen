@@ -169,36 +169,24 @@
 
       ];
 
-      $("#templatemo-pie-chart").load(function(){
-        var ctx_pie = document.getElementById("templatemo-pie-chart").getContext("2d");
-        window.myPieChart = new Chart(ctx_pie).Pie(pieChartData,{ responsive: true});        
-      });
-
-      window.onload = function(){
+      $(document).ready( function() {
         var ctx_line = document.getElementById("templatemo-line-chart").getContext("2d");
-        var ctx_bar = document.getElementById("templatemo-bar-chart").getContext("2d");
-        var ctx_pie = document.getElementById("templatemo-pie-chart").getContext("2d");
-        var ctx_doughnut = document.getElementById("templatemo-doughnut-chart").getContext("2d");
-        var ctxRadar = document.getElementById("templatemo-radar-chart").getContext("2d");
-        var ctxPolar = document.getElementById("templatemo-polar-chart").getContext("2d");
+        window.myLine = new Chart(ctx_line).Line(lineChartData, { responsive: true });
 
-        window.myLine = new Chart(ctx_line).Line(lineChartData, {
-          responsive: true
-        });
-        window.myBar = new Chart(ctx_bar).Bar(lineChartData, {
-          responsive: true
-        });
-        window.myPieChart = new Chart(ctx_pie).Pie(pieChartData,{
-          responsive: true
-        });
-        window.myDoughnutChart = new Chart(ctx_doughnut).Doughnut(pieChartData,{
-          responsive: true
-        });
-        var myRadarChart = new Chart(ctxRadar).Radar(radarChartData, {
-          responsive: true
-        });
-        var myPolarAreaChart = new Chart(ctxPolar).PolarArea(polarAreaChartData, {
-          responsive: true
-        });
-      }
+        var ctx_pie = document.getElementById("templatemo-pie-chart").getContext("2d");
+        window.myPieChart = new Chart(ctx_pie).Pie(pieChartData,{ responsive: true });                
+
+        var ctx_bar = document.getElementById("templatemo-bar-chart").getContext("2d");
+        window.myBar = new Chart(ctx_bar).Bar(lineChartData, { responsive: true });
+
+        var ctx_doughnut = document.getElementById("templatemo-doughnut-chart").getContext("2d");
+        window.myDoughnutChart = new Chart(ctx_doughnut).Doughnut(pieChartData,{ responsive: true });
+
+        var ctxRadar = document.getElementById("templatemo-radar-chart").getContext("2d");
+        var myRadarChart = new Chart(ctxRadar).Radar(radarChartData, { responsive: true });
+
+        var ctxPolar = document.getElementById("templatemo-polar-chart").getContext("2d");
+        var myPolarAreaChart = new Chart(ctxPolar).PolarArea(polarAreaChartData, { responsive: true });
+
+      }); // document.ready
     </script>
