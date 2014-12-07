@@ -1,6 +1,6 @@
       <div class="templatemo-content-wrapper">
         <div class="templatemo-content">
-          [[[page:breadcrumb(["Admin Panel", "Manage Users", {active, "Tables"}])]]]
+          [[[page:breadcrumb_block(tables_bc,["Admin Panel", "Manage Users", "Tables"])]]]
           <h1>Manage Users</h1>
           <p>Here goes tables and users.</p>
           <div class="row margin-bottom-30">

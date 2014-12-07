@@ -21,18 +21,8 @@ header() ->
             "Bootstrap test on Nitrogen".
 
 
-breadcrumb(Items) ->
-    Body = lists:map(
-                        fun({active, Element}) -> #listitem{ class = "active", text = Element };
-                           (Other)             -> #listitem{ text = Other} 
-                        end
-                        ,Items),
-    #list{ 
-             class = "breadcrumb"
-            ,numbered = true
-            ,body = Body
-        }.
-
+breadcrumb_block(Id, Items) ->
+    #bs_breadcrumb{ id = Id, items = Items}.
 
 %% Load the sidebar, and notice comet processes main panel is available.
 sidebar_block() ->
@@ -153,7 +143,7 @@ nav_pills_block() ->
                 class= "nav-pills"
                 ,body = [
                              #listitem{ class= active, body= #link{ text="Home "    , body= #bs_badge{ text="12" }  ,postback=home_click }}
-                            ,#listitem{ class= active, body= #link{ text="Profile " , body= #bs_badge{ text="126" } ,postback=home_click }}
+                            ,#listitem{ class= active, body= #link{ text="Profile " , body= #bs_badge{ text="126" } ,postback=kk }}
                             ,#listitem{ class= active, body= #link{ text="Messages ", body= #bs_badge{ text="14" }  ,postback=home_click }}
                         ]
  
