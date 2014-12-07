@@ -12,8 +12,10 @@
 
 
 %% A buch of comet process goes up here, they care for the widgets on some panels
-main() -> 
-    #template { file="./site/templates/dashboard.tpl", bindings = [{'Content', main}] }.
+main() ->
+%%    wf:comet(fun() -> background:background_update_init(bar1, main, 50 ) end, contentPool),    
+%%    wf:comet(fun() -> background:background_update_init(bar2, main, 45 ) end, contentPool),    
+     #template { file="./site/templates/dashboard.tpl", bindings = [{'Content', main}] }.
 
 title() -> 
             "Bootstrap test on Nitrogen".
@@ -35,8 +37,8 @@ breadcrumb(Items) ->
 
 
 %% Load the sidebar, and notice comet processes main panel is available.
-sidebar() ->
-    %%wf:send(contentPool, {panel, main}),
+sidebar_block() ->
+    wf:send(contentPool, {panel, main}),
     #panel{  id   = sidebarPanel
             ,body = #template{ file="./site/templates/sidebar_panel.tpl"}
             }.
@@ -62,10 +64,56 @@ content(Panel) ->
                 content(main)
     end.
 
+modal_panel_block() ->
+                #panel{  id = modalPanel
+                        ,body = #template{ file="./site/templates/dashboard_panel_modal.tpl" }
+                        }.
+
 load_comet() ->
     %% This comet function updates a counter and display a moving progress bar
-%%    wf:comet(fun() -> background:background_update_init(bar1, main) end, contentPool),    
     "".
+
+%%% -------------- Sidebar panel functions --------------
+
+menubar_block() ->
+    lists:map(
+                 fun menu_bar_item/1
+                ,[ 
+                     {main       , "fa fa-home", "Home", ""}
+                    ,{data       , "fa fa-cubes", "Data Visualization",9}
+                    ,{maps       , "fa fa-map-marker", "Maps",42}
+                    ,{tables     , "fa fa-users" , "Manage Users","ADMIN"}
+                    ,{preferences, "fa fa-cog", "Preferences",""}
+                    ]
+                ).
+
+menu_bar_item({Target, Class, Label, Badge}) ->
+        #listitem {
+                    body = #link {                                         
+                                    body = [
+                                             #i{ class = Class }
+                                            ,#bs_badge{ class = "pull-right", text = wf:to_list(Badge) }
+                                            ,#literal{ text = Label }
+                                                    ]
+                                        ,postback = {sidebar, Target}
+                                    }
+                    }.
+%% Receive sidebar events and change content panels, signaling comet pool "content" about panel change.
+sidebar_event({sidebar, Panel}) ->
+    case Panel of
+        main    ->
+                    wf:replace(contentPanel, content(main)),
+                    wf:send(contentPool, {panel, main});
+        data    ->
+                    wf:replace(contentPanel, content(data)),
+                    wf:send(contentPool, {panel, data});
+        tables  ->
+                    wf:replace(contentPanel, content(tables)),
+                    wf:send(contentPool, {panel, tables});
+        _       ->
+                    wf:wire(#alert { text="Function not implemented!"})
+    end.
+
 
 %%% -------------- Main panel functions --------------
 
@@ -91,7 +139,7 @@ nav_pills_block() ->
 progress_bar_block() -> 
     [
          #bs_progress_bar{ id = bar1, text = "50", severity = normal, percentage = 50 }
-        ,#bs_progress_bar{ text = "45% Complete", sr_only= true, mode = normal, percentage = 45 }   
+        ,#bs_progress_bar{ id = bar2, text = "45% Complete", sr_only= true, mode = normal, percentage = 45 }   
     ].
 
 
@@ -173,47 +221,6 @@ pagination_block() ->
                     ,items = [minimum, "1", {current, "2"}, "3", "4", "5", maximum]
     }.
 
-
-%%% -------------- Sidebar panel functions --------------
-
-menubar_block() ->
-    lists:map(
-                 fun menu_bar_item/1
-                ,[ 
-                     {main       , "fa fa-home", "Home", ""}
-                    ,{data       , "fa fa-cubes", "Data Visualization",9}
-                    ,{maps       , "fa fa-map-marker", "Maps",42}
-                    ,{tables     , "fa fa-users" , "Manage Users","ADMIN"}
-                    ,{preferences, "fa fa-cog", "Preferences",""}
-                    ]
-                ).
-
-menu_bar_item({Target, Class, Label, Badge}) ->
-        #listitem {
-                    body = #link {                                         
-                                    body = [
-                                             #i{ class = Class }
-                                            ,#bs_badge{ class = "pull-right", text = wf:to_list(Badge) }
-                                            ,#literal{ text = Label }
-                                                    ]
-                                        ,postback = {sidebar, Target}
-                                    }
-                    }.
-%% Receive sidebar events and change content panels, signaling comet pool "content" about panel change.
-sidebar_event({sidebar, Panel}) ->
-    case Panel of
-        main    ->
-                    %wf:send(contentPool, {panel, main}),
-                    wf:replace(contentPanel, content(main));
-        data    ->
-                    %wf:replace(contentPanel, content(data)),
-                    wf:send(contentPool, {panel, data});
-        tables  ->
-                    %wf:send(contentPool, {panel, tables}),
-                    wf:replace(contentPanel, content(tables));
-        _       ->
-                    wf:wire(#alert { text="Function not implemented!"})
-    end.
 
 
 %%% -------------- Event functions --------------
