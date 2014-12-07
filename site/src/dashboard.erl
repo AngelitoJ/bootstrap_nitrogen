@@ -13,8 +13,8 @@
 
 %% A buch of comet process goes up here, they care for the widgets on some panels
 main() ->
-%%    wf:comet(fun() -> background:background_update_init(bar1, main, 50 ) end, contentPool),    
-%%    wf:comet(fun() -> background:background_update_init(bar2, main, 45 ) end, contentPool),    
+    wf:comet(fun() -> background:background_update_init(bar1, main, 50 ) end),    
+    wf:comet(fun() -> background:background_update_init(bar2, main, 45 ) end),    
      #template { file="./site/templates/dashboard.tpl", bindings = [{'Content', main}] }.
 
 title() -> 
@@ -158,6 +158,7 @@ table_block() ->
                 ,{record, ["4", "Chris", "Jensen", "@cj", "cj@computers.com"]}
                 ,{record, ["5", "Mary", "Shelly", "@ms", "ms@books.com"]}
             ],
+    L  = length(Data),       
     R0 = lists:map(fun(Item) -> {random:uniform(5), Item} end, Data),
     R1 = lists:sort(R0),
     R2 = lists:map(fun({_,I}) -> I end, R1),
@@ -199,7 +200,12 @@ button_group(Label, Options) ->
              class = "btn-group"
             ,body = [
                        #button{ class = "btn btn-info", text = Label, body = #literal{ text = ""}}
-                      ,#button{ class = "btn btn-info dropdown-togle", body = [ #span{ class = "caret"}, #span{ class = "sr-only", text = "Toggle Dropdown" }]}
+                      ,#button{  class = "btn btn-info dropdown-togle"
+                                ,data_fields = [{togle,dropdown}]
+                                ,body = [ 
+                                             #span{ class = "caret"}
+                                            ,#span{ class = "sr-only", text = "Toggle Dropdown" }
+                                        ]}
                       ,dropdown_menu(Options)
                     ]
             }.
