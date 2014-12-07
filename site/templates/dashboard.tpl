@@ -15,6 +15,7 @@
   <script src="js/templatemo_script.js"></script>
   <script src="js/Chart.min.js"></script>
   <link rel="stylesheet" href="/nitrogen/jquery-ui/jquery.ui.all.css" type="text/css" media="screen" charset="utf-8" />
+  <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/templatemo_main.css">
 </head>
 <body>
@@ -34,20 +35,7 @@
       [[[page:sidebar_block()]]]
       [[[page:content(Content)]]]
       <!-- Modal -->
-      <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-              <h4 class="modal-title" id="myModalLabel">Are you sure you want to sign out?</h4>
-            </div>
-            <div class="modal-footer">
-              <a href="login" class="btn btn-primary">Yes</a>
-              <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-            </div>
-          </div>
-        </div>
-      </div>
+      [[[page:modal_panel_block()]]]
       <footer class="templatemo-footer">
         <div class="templatemo-copyright">
           <p>Copyright &copy; 2084 Your Company Name <!-- Credit: www.templatemo.com --></p>
