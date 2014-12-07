@@ -48,3 +48,12 @@
                             ,size  = normal :: small | normal | large
                             ,items = []     :: [ pag_item() ]
                         }).
+
+
+%% Bootstrap breadcrumb element
+-record(bs_breadcrumb, {
+                             ?ELEMENT_BASE(element_bs_breadcrumb)
+                            ,items = []     :: [string()]
+                        }).
+
+
