@@ -1,5 +1,7 @@
 %% -*- mode: nitrogen -*-
 %% vim: ts=4 sw=4 et
+%% Copyright (c) 2014 Angel Alvarez
+
 -module (element_bs_badge).
 -include_lib("nitrogen_core/include/wf.hrl").
 -include("records.hrl").
