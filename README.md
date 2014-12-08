@@ -13,3 +13,20 @@ The template is gonna be translated into a series of nitrogen elements resemblin
 First, bare nitrogen elements are used to mimic the original markup using nested structures if needed.
 Second, new custom elemnets "bs_<element>" are created into nitrogen for every bootstrap widget contained in the template.
 
+Current Bootstrap elements so far:
+
+	- progress bar
+		support for classes "info", "success", "warning" and danger 
+		support for types "normal" "striped" and "striped active"
+		TODO: stacked bars
+	- pagination
+		full support for navigation component (see code element_bs_pagination for comments)
+	- nav
+
+	- breadcrumb
+
+	- badge
+
+
+
+Thanks to Jesse Gumm (Nitrogen project) for his kind support. 
